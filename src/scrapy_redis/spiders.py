@@ -194,7 +194,10 @@ class RedisMixin(object):
             if scrapy_version >= (2, 6):
                 self.crawler.engine.crawl(req)
             else:
-                self.crawler.engine.crawl(req, spider=self)
+                try:
+                    self.crawler.engine.crawl(req, spider=self)
+                except:
+                    self.crawler.engine.crawl(req)
 
     def spider_idle(self):
         """
